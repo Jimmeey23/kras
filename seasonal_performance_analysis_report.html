@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physique 57 India - KRA Operating Review</title>
+<style>
+:root {
+  --bg: #f5f7fb;
+  --paper: #ffffff;
+  --ink: #0b1220;
+  --body: #1f2937;
+  --muted: #5f6b7a;
+  --line: #d7dee8;
+  --line-strong: #8091a8;
+  --soft: #edf2f7;
+  --deep-blue: #0a2f5f;
+  --blue: #145da0;
+  --blue-soft: #edf4fb;
+  --yellow: #e8b923;
+  --yellow-soft: #fff7da;
+  --green: #0a2f5f;
+  --green-soft: #edf4fb;
+  --amber: #7a5a00;
+  --amber-soft: #fff7da;
+  --red: #9f1d1d;
+  --red-soft: #fbeeee;
+  --radius: 10px;
+  --shadow: 0 12px 34px rgba(11, 18, 32, 0.08);
+  --shadow-soft: 0 5px 16px rgba(11, 18, 32, 0.055);
+  --blue-gradient: #0a2f5f;
+  --accent-gradient: linear-gradient(90deg, #0a2f5f 0%, #0a2f5f 88%, #e8b923 88%, #e8b923 100%);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Aptos", "Inter", "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.page {
+  width: min(1320px, calc(100% - 44px));
+  margin: 28px auto 56px;
+  padding: 34px 34px 56px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.header {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 28px;
+  align-items: start;
+  padding: 30px 0 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  top: -34px;
+  left: -34px;
+  right: -34px;
+  height: 6px;
+  background: var(--accent-gradient);
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--deep-blue);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  max-width: 760px;
+  font-size: clamp(32px, 4vw, 50px);
+  line-height: 1.02;
+  letter-spacing: 0;
+  color: var(--deep-blue);
+}
+
+.meta {
+  min-width: 330px;
+  color: var(--body);
+  text-align: right;
+  font-size: 12px;
+  line-height: 1.9;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 13px 15px;
+  background: #f8fafc;
+}
+
+.report-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  margin: 22px 0 0;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #f8fafc;
+  border-bottom: 1px solid var(--line);
+}
+
+.report-controls strong {
+  display: block;
+  font-size: 13px;
+}
+
+.report-controls span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.report-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 28px;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.summary > *,
+.header > *,
+.report-controls > *,
+.report-actions > *,
+.kra-head > *,
+.sop-layout > *,
+.card,
+.metric {
+  min-width: 0;
+}
+
+.summary-copy {
+  margin: 0;
+  max-width: 720px;
+  color: var(--body);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.kpi-grid,
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.card,
+.metric,
+.callout,
+.chart,
+.sop-viewer {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+
+.card,
+.metric {
+  padding: 15px 16px;
+  background: #ffffff;
+}
+
+.label {
+  margin: 0 0 7px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.value {
+  display: block;
+  color: var(--deep-blue);
+  font-size: 25px;
+  line-height: 1.08;
+  font-weight: 820;
+  letter-spacing: 0;
+}
+
+.note {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.pos { color: var(--deep-blue); font-weight: 800; }
+.neg { color: var(--red); font-weight: 800; }
+.neu { color: var(--muted); font-weight: 800; }
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 12px 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+}
+
+.nav a {
+  flex: 0 0 auto;
+  color: var(--deep-blue);
+  text-decoration: none;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.stack {
+  display: grid;
+  gap: 18px;
+}
+
+.kra {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 30px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.kra::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: var(--accent-gradient);
+}
+
+.kra-head {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 390px);
+  gap: 24px;
+  padding-bottom: 20px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.kra-number {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  min-height: 30px;
+  color: #ffffff;
+  background: var(--blue-gradient);
+  border: 1px solid var(--deep-blue);
+  border-bottom: 3px solid var(--yellow);
+  border-radius: 8px;
+  box-shadow: none;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin: 10px 0 8px;
+  font-size: 31px;
+  line-height: 1.12;
+  letter-spacing: 0;
+  color: var(--deep-blue);
+}
+
+.sub {
+  margin: 0;
+  color: var(--muted);
+  max-width: 720px;
+}
+
+.status {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.03em;
+}
+.status.green { background: var(--green-soft); color: var(--green); }
+.status.blue { background: var(--blue-soft); color: var(--blue); }
+.status.amber { background: var(--amber-soft); color: var(--amber); }
+.status.red { background: var(--red-soft); color: var(--red); }
+
+.stance {
+  margin: 0;
+  color: var(--body);
+  font-size: 13px;
+}
+
+.metric-grid {
+  margin-bottom: 18px;
+}
+
+.metric .value {
+  font-size: 22px;
+}
+
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.callout {
+  padding: 14px 16px;
+  background: #f8fafc;
+  border-left: 4px solid var(--yellow);
+}
+
+.callout p {
+  margin: 0;
+  color: var(--body);
+}
+
+.callout strong { color: var(--ink); }
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.chart {
+  padding: 16px;
+  background: #ffffff;
+}
+
+.chart h3,
+.table-title,
+.sop-viewer h3 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 92px;
+  gap: 10px;
+  align-items: center;
+  margin: 9px 0;
+  font-size: 12px;
+}
+
+.bar-track {
+  height: 10px;
+  background: var(--soft);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.bar {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--blue);
+}
+
+.bar.green { background: var(--deep-blue); }
+.bar.amber { background: var(--yellow); }
+.bar.red { background: var(--red); }
+.bar.light { background: #8aa6c6; }
+
+.bar-value {
+  text-align: right;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.line-chart {
+  width: 100%;
+  height: 220px;
+}
+
+.line-chart text {
+  fill: var(--muted);
+  font-size: 10px;
+}
+
+.line-chart .grid {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.line-chart .p1 {
+  fill: none;
+  stroke: #8aa6c6;
+  stroke-width: 3;
+}
+
+.line-chart .p2 {
+  fill: none;
+  stroke: var(--deep-blue);
+  stroke-width: 3;
+}
+
+.line-chart circle.p1 { fill: #8aa6c6; stroke: none; }
+.line-chart circle.p2 { fill: var(--deep-blue); stroke: none; }
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 18px;
+  font-size: 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 18px;
+}
+
+.table-scroll table {
+  min-width: 820px;
+  margin-bottom: 0;
+}
+
+.monthly-table tbody tr:nth-child(odd) {
+  background: #f8fafc;
+}
+
+.monthly-table td:first-child,
+.monthly-table th:first-child {
+  position: sticky;
+  left: 0;
+  background: inherit;
+}
+
+th {
+  text-align: left;
+  padding: 10px 10px;
+  border-bottom: 1px solid var(--line);
+  color: var(--deep-blue);
+  background: #f2f6fb;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+tr:last-child td { border-bottom: 0; }
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.source-note {
+  padding: 12px 14px;
+  margin-top: 6px;
+  border-radius: var(--radius);
+  background: #f8fafc;
+  color: var(--body);
+  font-size: 12px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--deep-blue);
+}
+
+.sop-layout {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #f8fafc;
+}
+
+.sop-list {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  max-height: 820px;
+  overflow: auto;
+  padding: 8px 10px 8px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #ffffff;
+}
+
+.sop-item {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 13px;
+  background: #ffffff;
+  box-shadow: none;
+  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.sop-item.active {
+  border-color: var(--deep-blue);
+  border-left-color: var(--yellow);
+  background: #f8fafc;
+  box-shadow: var(--shadow-soft);
+  transform: translateX(1px);
+}
+
+.sop-row {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.sop-title {
+  margin: 0;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--deep-blue);
+}
+
+.sop-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.feedback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.feedback-actions .docx-link {
+  min-width: 180px;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 7px 11px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+}
+
+button:hover,
+.docx-link:hover {
+  transform: translateY(-1px);
+}
+
+button.primary {
+  background: var(--blue-gradient);
+  color: white;
+  border-color: var(--deep-blue);
+  box-shadow: none;
+}
+
+button.secondary {
+  background: var(--paper);
+  color: var(--deep-blue);
+  border-color: var(--line-strong);
+}
+
+.sop-viewer {
+  min-height: 820px;
+  overflow: hidden;
+  border: 2px solid var(--deep-blue);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: 0 14px 34px rgba(11, 18, 32, 0.12);
+}
+
+.viewer-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  background: var(--deep-blue);
+  color: #ffffff;
+}
+
+.viewer-head h3 {
+  color: #ffffff;
+  margin: 0;
+}
+
+.viewer-head .note {
+  margin: 0;
+  color: var(--yellow-soft);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(232, 185, 35, 0.45);
+  border-radius: 8px;
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+
+#sopFrame {
+  display: block;
+  width: calc(100% - 28px);
+  height: 760px;
+  margin: 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(11, 18, 32, 0.08);
+}
+
+#sopFrame[hidden],
+#docxPanel[hidden] {
+  display: none;
+}
+
+.docx-panel {
+  height: 760px;
+  padding: 28px;
+  background: #f8fafc;
+}
+
+.docx-panel-inner {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  height: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  color: var(--body);
+}
+
+.docx-panel-inner h4 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  letter-spacing: 0;
+}
+
+.docx-panel-inner p {
+  margin: 0 0 16px;
+}
+
+.docx-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  border: 1px solid var(--deep-blue);
+  border-radius: 8px;
+  padding: 8px 13px;
+  background: var(--blue-gradient);
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  box-shadow: none;
+}
+
+.docx-link.secondary-link {
+  background: var(--paper);
+  color: var(--deep-blue);
+  border-color: var(--line-strong);
+  box-shadow: none;
+}
+
+.footer {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(32, 32, 29, 0.42);
+}
+
+.modal-backdrop[hidden] {
+  display: none;
+}
+
+.modal {
+  width: min(520px, 100%);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.22);
+  padding: 22px;
+}
+
+.modal h3 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  letter-spacing: 0;
+}
+
+.modal p {
+  margin: 0 0 16px;
+  color: var(--muted);
+}
+
+.modal label {
+  display: grid;
+  gap: 7px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.modal input {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  padding: 9px 11px;
+  color: var(--ink);
+  font: inherit;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.email-status {
+  min-height: 18px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 980px) {
+  .header,
+  .report-controls,
+  .summary,
+  .kra-head,
+  .insight-grid,
+  .chart-grid,
+  .sop-layout {
+    grid-template-columns: 1fr;
+  }
+  .meta { text-align: left; }
+  .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 620px) {
+  body { overflow-x: hidden; }
+  .page {
+    width: auto;
+    max-width: calc(100vw - 24px);
+    margin: 12px;
+    padding: 24px 18px 38px;
+  }
+  .header {
+    gap: 18px;
+    padding: 24px 0 22px;
+  }
+  .header::before {
+    top: -24px;
+    left: -18px;
+    right: -18px;
+  }
+  .eyebrow {
+    font-size: 10px;
+    overflow-wrap: anywhere;
+  }
+  h1 {
+    font-size: 28px;
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+  .meta {
+    width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .meta div,
+  .report-controls span,
+  .summary-copy {
+    overflow-wrap: anywhere;
+  }
+  .report-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .report-actions {
+    justify-content: flex-start;
+  }
+  .report-actions button {
+    flex: 1 1 130px;
+  }
+  .feedback-actions .docx-link {
+    width: 100%;
+  }
+  .summary {
+    padding: 24px 0;
+  }
+  .summary-copy {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .kpi-grid,
+  .metric-grid { grid-template-columns: 1fr; }
+  .kra { padding: 18px; }
+  .kra-head { gap: 16px; }
+  .bar-row { grid-template-columns: 96px 1fr 72px; }
+  table { font-size: 12px; }
+  th, td { padding: 8px 6px; }
+  .sop-list { max-height: none; }
+  .sop-viewer { min-height: 620px; }
+  .viewer-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  #sopFrame,
+  .docx-panel {
+    height: 560px;
+  }
+}
+
+@media print {
+  body { background: white; }
+  .page { width: 100%; padding: 18px; }
+  .nav, .report-controls, .sop-actions, .modal-backdrop { display: none; }
+  .kra, .chart, .metric, .card { break-inside: avoid; }
+  .sop-list { max-height: none; overflow: visible; }
+  #sopFrame { height: 520px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="header">
+    <div>
+      <p class="eyebrow">Physique 57 India · Internal Operating Review</p>
+      <h1>KRA Performance Review: Oct 2025-Mar 2026</h1>
+    </div>
+    <div class="meta">
+      <div>Generated: 12 May 2026</div>
+      <div>Baseline: Oct 2024-Mar 2025</div>
+      <div>Review period: Oct 2025-Mar 2026</div>
+      <div>Studios: Kenkere · Kwality · Supreme</div>
+      <div>Author: Jimmeey Gondaa, Head of Sales & Client Servicing</div>
+    </div>
+  </header>
+
+  <section class="report-controls no-print" aria-label="Report export and email actions">
+    <div>
+      <strong>Share and export</strong>
+      <span>Export the current report or open a structured Gmail draft for circulation.</span>
+    </div>
+    <div class="report-actions">
+      <button class="primary" type="button" onclick="openEmailModal()">Email Me</button>
+      <button class="secondary" type="button" onclick="exportPdf()">Export PDF</button>
+      <button class="secondary" type="button" onclick="exportWord()">Export Word</button>
+      <button class="secondary" type="button" onclick="exportHtml()">Export HTML</button>
+    </div>
+  </section>
+
+  <section class="summary" aria-label="Executive readout">
+    <p class="summary-copy">
+      The P2 period shows a stronger commercial engine: the network added <strong>2,041 new members</strong>,
+      lifted same-season conversions to <strong>336</strong>, more than doubled referrals, and delivered
+      <strong>₹2.69Cr</strong> in corrected revenue. The revenue result is stronger than P1 both in size and
+      predictability. The only material gap is retention: lapsed memberships reached <strong>763</strong>, so the
+      next operating priority is to convert the larger P2 pipeline without allowing churn to dilute the growth.
+    </p>
+    <div class="kpi-grid">
+      <div class="card">
+        <p class="label">Corrected Revenue</p>
+        <span class="value">₹2.69Cr</span>
+        <span class="note pos">+17.8% vs ₹2.28Cr</span>
+      </div>
+      <div class="card">
+        <p class="label">New Members</p>
+        <span class="value">2,041</span>
+        <span class="note pos">+40.7% vs P1</span>
+      </div>
+      <div class="card">
+        <p class="label">Referrals</p>
+        <span class="value">264</span>
+        <span class="note pos">+127.6% vs P1</span>
+      </div>
+      <div class="card">
+        <p class="label">Primary Risk</p>
+        <span class="value">Churn</span>
+        <span class="note neg">763 lapsed memberships</span>
+      </div>
+    </div>
+  </section>
+
+  <nav class="nav" aria-label="KRA navigation">
+    <a href="#conversion">KRA 1 Conversion</a>
+    <a href="#churn">KRA 2 Churn</a>
+    <a href="#trials">KRA 3 Trials & Referrals</a>
+    <a href="#stability">KRA 4 Stability</a>
+    <a href="#revenue">KRA 5 Revenue</a>
+    <a href="#sop">KRA 6 SOP</a>
+    <a href="#feedback">KRA 7 Feedback System</a>
+  </nav>
+
+  <main class="stack">
+    <section class="kra" id="conversion">
+      <div class="kra-head">
+        <div>
+          <span class="kra-number">KRA 1</span>
+          <h2>Conversion Growth</h2>
+          <p class="sub">Objective: grow conversion performance while expanding the new-member base.</p>
+        </div>
+        <div>
+          <span class="status amber">Ahead on volume, behind on matured rate</span>
+          <p class="stance">P2 built a much larger cohort and converted more members inside the same six-month window. The visible total conversion rate is lower because P2 has not had the same post-period runway for late purchases.</p>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric"><p class="label">P2 New Members</p><span class="value">2,041</span><span class="note pos">+40.7% vs 1,451</span></div>
+        <div class="metric"><p class="label">Same-Season Converts</p><span class="value">336</span><span class="note pos">+12.0% vs 300</span></div>
+        <div class="metric"><p class="label">Total Converts to Date</p><span class="value">378</span><span class="note neg">-6.4% vs 404</span></div>
+        <div class="metric"><p class="label">Conversion Rate</p><span class="value">18.5%</span><span class="note neg">P1 matured rate: 27.8%</span></div>
+      </div>
+
+      <div class="insight-grid">
+        <div class="callout"><p><strong>Positive read:</strong> P2 generated 590 more new members and 36 more same-season conversions. January was the strongest intake month at 483 new members, creating a large follow-up pool for conversion recovery.</p></div>
+        <div class="callout"><p><strong>Justification where P2 trails:</strong> P1 added 104 late conversions after its review window. P2 has only 42 visible late conversions so far, so the lower total conversion rate should be read as a timing gap, not a demand failure.</p></div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="chart">
+          <h3>New Members by Studio</h3>
+          <div class="bar-row"><span>Kenkere</span><div class="bar-track"><span class="bar light" style="width:69%;"></span></div><span class="bar-value">551 P1</span></div>
+          <div class="bar-row"><span>Kenkere</span><div class="bar-track"><span class="bar green" style="width:100%;"></span></div><span class="bar-value">797 P2</span></div>
+          <div class="bar-row"><span>Kwality</span><div class="bar-track"><span class="bar light" style="width:42%;"></span></div><span class="bar-value">335 P1</span></div>
+          <div class="bar-row"><span>Kwality</span><div class="bar-track"><span class="bar green" style="width:81%;"></span></div><span class="bar-value">646 P2</span></div>
+          <div class="bar-row"><span>Supreme</span><div class="bar-track"><span class="bar light" style="width:71%;"></span></div><span class="bar-value">565 P1</span></div>
+          <div class="bar-row"><span>Supreme</span><div class="bar-track"><span class="bar green" style="width:75%;"></span></div><span class="bar-value">598 P2</span></div>
+        </div>
+        <div class="chart">
+          <h3>Total Conversions by Studio</h3>
+          <div class="bar-row"><span>Kenkere</span><div class="bar-track"><span class="bar light" style="width:97%;"></span></div><span class="bar-value">147 P1</span></div>
+          <div class="bar-row"><span>Kenkere</span><div class="bar-track"><span class="bar amber" style="width:76%;"></span></div><span class="bar-value">115 P2</span></div>
+          <div class="bar-row"><span>Kwality</span><div class="bar-track"><span class="bar light" style="width:70%;"></span></div><span class="bar-value">107 P1</span></div>
+          <div class="bar-row"><span>Kwality</span><div class="bar-track"><span class="bar green" style="width:100%;"></span></div><span class="bar-value">152 P2</span></div>
+          <div class="bar-row"><span>Supreme</span><div class="bar-track"><span class="bar light" style="width:99%;"></span></div><span class="bar-value">150 P1</span></div>
+          <div class="bar-row"><span>Supreme</span><div class="bar-track"><span class="bar amber" style="width:73%;"></span></div><span class="bar-value">111 P2</span></div>
+        </div>
+      </div>
+
+      <p class="table-title">Conversion Detail</p>
+      <table>
+        <thead><tr><th>Studio</th><th class="num">P1 New</th><th class="num">P2 New</th><th class="num">P1 Total Converts</th><th class="num">P2 Total Converts</th><th class="num">P1 Rate</th><th class="num">P2 Rate</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Kenkere House</td><td class="num">551</td><td class="num pos">797</td><td class="num">147</td><td class="num">115</td><td class="num">26.7%</td><td class="num neg">14.4%</td><td>Prioritise January P2 cohort follow-up; 263 new members entered in that month.</td></tr>
+          <tr><td>Kwality House</td><td class="num">335</td><td class="num pos">646</td><td class="num">107</td><td class="num pos">152</td><td class="num">31.9%</td><td class="num">23.5%</td><td>Conversion count improved; reduce churn leakage to protect gains.</td></tr>
+          <tr><td>Supreme HQ</td><td class="num">565</td><td class="num pos">598</td><td class="num">150</td><td class="num">111</td><td class="num">26.5%</td><td class="num neg">18.6%</td><td>Audit package mix and instructor-led conversion touchpoints.</td></tr>
+        </tbody>
+      </table>
+
+      <p class="table-title">Monthly Conversion Breakdown</p>
+      <div class="table-scroll">
+        <table class="monthly-table">
+          <thead><tr><th>Metric</th><th class="num">Oct</th><th class="num">Nov</th><th class="num">Dec</th><th class="num">Jan</th><th class="num">Feb</th><th class="num">Mar</th><th class="num">Total</th></tr></thead>
+          <tbody>
+            <tr><td>P1 New Members</td><td class="num">182</td><td class="num">230</td><td class="num">234</td><td class="num">266</td><td class="num">257</td><td class="num">282</td><td class="num">1,451</td></tr>
+            <tr><td>P2 New Members</td><td class="num pos">264</td><td class="num pos">369</td><td class="num pos">286</td><td class="num pos">483</td><td class="num pos">334</td><td class="num pos">305</td><td class="num pos">2,041</td></tr>
+            <tr><td>P1 Same-Season Converts</td><td class="num">46</td><td class="num">43</td><td class="num">60</td><td class="num">60</td><td class="num">48</td><td class="num">43</td><td class="num">300</td></tr>
+            <tr><td>P2 Same-Season Converts</td><td class="num pos">66</td><td class="num pos">68</td><td class="num pos">61</td><td class="num">53</td><td class="num pos">50</td><td class="num">38</td><td class="num pos">336</td></tr>
+            <tr><td>P1 Converts to Date</td><td class="num">52</td><td class="num">53</td><td class="num">78</td><td class="num">76</td><td class="num">65</td><td class="num">80</td><td class="num">404</td></tr>
+            <tr><td>P2 Converts to Date</td><td class="num pos">70</td><td class="num pos">76</td><td class="num">63</td><td class="num">59</td><td class="num">52</td><td class="num">58</td><td class="num">378</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="kra" id="churn">
+      <div class="kra-head">
+        <div>
+          <span class="kra-number">KRA 2</span>
+          <h2>Churn Reduction</h2>
+          <p class="sub">Objective: reduce lapsed memberships and protect the active studio community.</p>
+        </div>
+        <div>
+          <span class="status red">Not met</span>
+          <p class="stance">This KRA is the clear exception. P2 acquisition is materially stronger, but lapsed memberships increased faster than intake, especially at Kwality House.</p>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric"><p class="label">P2 Lapsed</p><span class="value">763</span><span class="note neg">+83.0% vs 417</span></div>
+        <div class="metric"><p class="label">Lapsed / New Member Ratio</p><span class="value">37.4%</span><span class="note neg">P1: 28.7%</span></div>
+        <div class="metric"><p class="label">Kwality Contribution</p><span class="value">45.0%</span><span class="note">343 of 763 P2 lapsed</span></div>
+        <div class="metric"><p class="label">Net Intake After Lapsed</p><span class="value">1,278</span><span class="note pos">+23.6% vs 1,034</span></div>
+      </div>
+
+      <div class="insight-grid">
+        <div class="callout"><p><strong>Justification on the figures:</strong> some increase is expected because P2 acquired 590 more new members. Even after lapsed memberships, P2 net intake is 1,278 versus 1,034 in P1.</p></div>
+        <div class="callout"><p><strong>Why it remains a risk:</strong> the lapsed-to-new ratio worsened by 8.7 percentage points. Kwality alone contributed 343 lapsed memberships, which is too large to explain through scale.</p></div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="chart">
+          <h3>Lapsed Memberships by Studio</h3>
+          <div class="bar-row"><span>Kenkere</span><div class="bar-track"><span class="bar light" style="width:41%;"></span></div><span class="bar-value">141 P1</span></div>
+          <div class="bar-row"><span>Kenkere</span><div class="bar-track"><span class="bar amber" style="width:47%;"></span></div><span class="bar-value">161 P2</span></div>
+          <div class="bar-row"><span>Kwality</span><div class="bar-track"><span class="bar light" style="width:34%;"></span></div><span class="bar-value">115 P1</span></div>
+          <div class="bar-row"><span>Kwality</span><div class="bar-track"><span class="bar red" style="width:100%;"></span></div><span class="bar-value">343 P2</span></div>
+          <div class="bar-row"><span>Supreme</span><div class="bar-track"><span class="bar light" style="width:47%;"></span></div><span class="bar-value">161 P1</span></div>
+          <div class="bar-row"><span>Supreme</span><div class="bar-track"><span class="bar red" style="width:76%;"></span></div><span class="bar-value">259 P2</span></div>
+        </div>
+        <div class="chart">
+          <h3>Churn Pressure Ratio</h3>
+          <div class="bar-row"><span>P1 Network</span><div class="bar-track"><span class="bar light" style="width:77%;"></span></div><span class="bar-value">28.7%</span></div>
+          <div class="bar-row"><span>P2 Network</span><div class="bar-track"><span class="bar red" style="width:100%;"></span></div><span class="bar-value">37.4%</span></div>
+          <div class="bar-row"><span>P2 Kenkere</span><div class="bar-track"><span class="bar amber" style="width:54%;"></span></div><span class="bar-value">20.2%</span></div>
+          <div class="bar-row"><span>P2 Kwality</span><div class="bar-track"><span class="bar red" style="width:83%;"></span></div><span class="bar-value">53.1%</span></div>
+          <div class="bar-row"><span>P2 Supreme</span><div class="bar-track"><span class="bar red" style="width:73%;"></span></div><span class="bar-value">43.3%</span></div>
+        </div>
+      </div>
+
+      <p class="table-title">Churn Detail</p>
+      <table>
+        <thead><tr><th>Studio</th><th class="num">P1 Lapsed</th><th class="num">P2 Lapsed</th><th class="num">Change</th><th class="num">P2 Lapsed / P2 New</th><th>Management Readout</th></tr></thead>
+        <tbody>
+          <tr><td>Kenkere House</td><td class="num">141</td><td class="num">161</td><td class="num neg">+14.2%</td><td class="num">20.2%</td><td>Manageable relative to intake growth; monitor high-volume January cohort.</td></tr>
+          <tr><td>Kwality House</td><td class="num">115</td><td class="num">343</td><td class="num neg">+198.3%</td><td class="num neg">53.1%</td><td>Immediate retention intervention required.</td></tr>
+          <tr><td>Supreme HQ</td><td class="num">161</td><td class="num">259</td><td class="num neg">+60.9%</td><td class="num neg">43.3%</td><td>Pair retention diagnosis with revenue/package audit.</td></tr>
+        </tbody>
+      </table>
+
+      <p class="table-title">Monthly Churn Breakdown</p>
+      <div class="table-scroll">
+        <table class="monthly-table">
+          <thead><tr><th>Metric</th><th class="num">Oct</th><th class="num">Nov</th><th class="num">Dec</th><th class="num">Jan</th><th class="num">Feb</th><th class="num">Mar</th><th class="num">Total</th></tr></thead>
+          <tbody>
+            <tr><td>P1 Lapsed Memberships</td><td class="num">52</td><td class="num">57</td><td class="num">66</td><td class="num">81</td><td class="num">80</td><td class="num">81</td><td class="num">417</td></tr>
+            <tr><td>P2 Lapsed Memberships</td><td class="num neg">104</td><td class="num neg">141</td><td class="num neg">131</td><td class="num neg">134</td><td class="num neg">133</td><td class="num neg">120</td><td class="num neg">763</td></tr>
+            <tr><td>Monthly Readout</td><td>Double P1</td><td>Peak churn</td><td>High</td><td>High</td><td>High</td><td>High</td><td>Retention KRA not met</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="kra" id="trials">
+      <div class="kra-head">
+        <div>
+          <span class="kra-number">KRA 3</span>
+          <h2>Trials & Referrals</h2>
+          <p class="sub">Objective: expand qualified first visits and referral-driven acquisition.</p>
+        </div>
+        <div>
+          <span class="status green">Strongly met through referrals</span>
+          <p class="stance">P2 trial count is flat, but referrals and hosted-class volume expanded sharply. The lead mix is stronger because a larger share came through warm community-led channels.</p>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric"><p class="label">Trials</p><span class="value">881</span><span class="note neg">-0.2% vs 883</span></div>
+        <div class="metric"><p class="label">Referrals</p><span class="value">264</span><span class="note pos">+127.6% vs 116</span></div>
+        <div class="metric"><p class="label">Trials + Referrals</p><span class="value">1,145</span><span class="note pos">+14.6% vs 999</span></div>
+        <div class="metric"><p class="label">Referral Share of New</p><span class="value">12.9%</span><span class="note pos">P1: 8.0%</span></div>
+      </div>
+
+      <div class="insight-grid">
+        <div class="callout"><p><strong>Positive read:</strong> P2 referrals rose every month versus P1 and peaked in February at 63. This gives the sales team a warmer conversion base than trial-only acquisition.</p></div>
+        <div class="callout"><p><strong>Justification where trials are flat:</strong> trial volume stayed near P1 because January and March shifted toward hosted-class and referral acquisition, not because top-of-funnel weakened.</p></div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="chart">
+          <h3>Trial Volume</h3>
+          <div class="bar-row"><span>Kenkere</span><div class="bar-track"><span class="bar light" style="width:97%;"></span></div><span class="bar-value">337 P1</span></div>
+          <div class="bar-row"><span>Kenkere</span><div class="bar-track"><span class="bar amber" style="width:83%;"></span></div><span class="bar-value">288 P2</span></div>
+          <div class="bar-row"><span>Kwality</span><div class="bar-track"><span class="bar light" style="width:64%;"></span></div><span class="bar-value">223 P1</span></div>
+          <div class="bar-row"><span>Kwality</span><div class="bar-track"><span class="bar green" style="width:71%;"></span></div><span class="bar-value">246 P2</span></div>
+          <div class="bar-row"><span>Supreme</span><div class="bar-track"><span class="bar light" style="width:93%;"></span></div><span class="bar-value">323 P1</span></div>
+          <div class="bar-row"><span>Supreme</span><div class="bar-track"><span class="bar green" style="width:100%;"></span></div><span class="bar-value">347 P2</span></div>
+        </div>
+        <div class="chart">
+          <h3>Referral Volume</h3>
+          <div class="bar-row"><span>Kenkere</span><div class="bar-track"><span class="bar light" style="width:0%;"></span></div><span class="bar-value">0 P1</span></div>
+          <div class="bar-row"><span>Kenkere</span><div class="bar-track"><span class="bar green" style="width:39%;"></span></div><span class="bar-value">49 P2</span></div>
+          <div class="bar-row"><span>Kwality</span><div class="bar-track"><span class="bar light" style="width:30%;"></span></div><span class="bar-value">38 P1</span></div>
+          <div class="bar-row"><span>Kwality</span><div class="bar-track"><span class="bar green" style="width:100%;"></span></div><span class="bar-value">125 P2</span></div>
+          <div class="bar-row"><span>Supreme</span><div class="bar-track"><span class="bar light" style="width:62%;"></span></div><span class="bar-value">78 P1</span></div>
+          <div class="bar-row"><span>Supreme</span><div class="bar-track"><span class="bar green" style="width:72%;"></span></div><span class="bar-value">90 P2</span></div>
+        </div>
+      </div>
+
+      <table>
+        <thead><tr><th>Studio</th><th class="num">P1 Trials</th><th class="num">P2 Trials</th><th class="num">P1 Referrals</th><th class="num">P2 Referrals</th><th>Readout</th></tr></thead>
+        <tbody>
+          <tr><td>Kenkere House</td><td class="num">337</td><td class="num">288</td><td class="num">0</td><td class="num pos">49</td><td>Trial softness is partly offset by a referral programme that did not exist in P1.</td></tr>
+          <tr><td>Kwality House</td><td class="num">223</td><td class="num pos">246</td><td class="num">38</td><td class="num pos">125</td><td>Best acquisition expansion; retention must catch up.</td></tr>
+          <tr><td>Supreme HQ</td><td class="num">323</td><td class="num pos">347</td><td class="num">78</td><td class="num pos">90</td><td>Healthy top-of-funnel despite earlier revenue concerns.</td></tr>
+        </tbody>
+      </table>
+
+      <p class="table-title">Monthly Trial, Referral, and Hosted-Class Breakdown</p>
+      <div class="table-scroll">
+        <table class="monthly-table">
+          <thead><tr><th>Metric</th><th class="num">Oct</th><th class="num">Nov</th><th class="num">Dec</th><th class="num">Jan</th><th class="num">Feb</th><th class="num">Mar</th><th class="num">Total</th></tr></thead>
+          <tbody>
+            <tr><td>P1 Trials</td><td class="num">113</td><td class="num">102</td><td class="num">170</td><td class="num">150</td><td class="num">157</td><td class="num">191</td><td class="num">883</td></tr>
+            <tr><td>P2 Trials</td><td class="num pos">161</td><td class="num pos">161</td><td class="num">136</td><td class="num pos">173</td><td class="num">138</td><td class="num">112</td><td class="num">881</td></tr>
+            <tr><td>P1 Referrals</td><td class="num">12</td><td class="num">20</td><td class="num">23</td><td class="num">25</td><td class="num">19</td><td class="num">17</td><td class="num">116</td></tr>
+            <tr><td>P2 Referrals</td><td class="num pos">29</td><td class="num pos">33</td><td class="num pos">52</td><td class="num pos">45</td><td class="num pos">63</td><td class="num pos">42</td><td class="num pos">264</td></tr>
+            <tr><td>P1 Hosted-Class New</td><td class="num">33</td><td class="num">61</td><td class="num">18</td><td class="num">54</td><td class="num">60</td><td class="num">39</td><td class="num">265</td></tr>
+            <tr><td>P2 Hosted-Class New</td><td class="num pos">47</td><td class="num pos">133</td><td class="num pos">60</td><td class="num pos">247</td><td class="num pos">101</td><td class="num pos">100</td><td class="num pos">688</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="kra" id="stability">
+      <div class="kra-head">
+        <div>
+          <span class="kra-number">KRA 4</span>
+          <h2>Revenue Stabilisation</h2>
+          <p class="sub">Objective: reduce month-on-month revenue volatility and improve predictability.</p>
+        </div>
+        <div>
+          <span class="status green">Network stability improved</span>
+          <p class="stance">Corrected revenue shows P2 was both larger and steadier. Network average absolute month-on-month variance fell from 30.3% to 15.4%, despite January being the strongest revenue month.</p>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric"><p class="label">Network Avg MoM Var</p><span class="value">15.4%</span><span class="note pos">P1: 30.3%</span></div>
+        <div class="metric"><p class="label">Best Stability Gain</p><span class="value">Kwality</span><span class="note pos">44.4% → 22.5%</span></div>
+        <div class="metric"><p class="label">Supreme Stability</p><span class="value">25.5%</span><span class="note pos">P1: 33.9%</span></div>
+        <div class="metric"><p class="label">Kenkere Exception</p><span class="value">61.8%</span><span class="note neg">Growth-spike volatility</span></div>
+      </div>
+
+      <div class="chart">
+        <h3>Network Monthly Revenue Trend (₹L)</h3>
+        <svg class="line-chart" viewBox="0 0 920 220" role="img" aria-label="Network monthly revenue line chart">
+          <line class="grid" x1="50" y1="30" x2="890" y2="30"></line>
+          <line class="grid" x1="50" y1="80" x2="890" y2="80"></line>
+          <line class="grid" x1="50" y1="130" x2="890" y2="130"></line>
+          <line class="grid" x1="50" y1="180" x2="890" y2="180"></line>
+          <text x="8" y="34">₹60L</text><text x="8" y="84">₹45L</text><text x="8" y="134">₹30L</text><text x="8" y="184">₹15L</text>
+          <polyline class="p1" points="70,121 238,138 406,55 574,99 742,92 890,115"></polyline>
+          <polyline class="p2" points="70,91 238,91 406,74 574,34 742,86 890,104"></polyline>
+          <circle class="p1" cx="70" cy="121" r="4"></circle><circle class="p1" cx="238" cy="138" r="4"></circle><circle class="p1" cx="406" cy="55" r="4"></circle><circle class="p1" cx="574" cy="99" r="4"></circle><circle class="p1" cx="742" cy="92" r="4"></circle><circle class="p1" cx="890" cy="115" r="4"></circle>
+          <circle class="p2" cx="70" cy="91" r="4"></circle><circle class="p2" cx="238" cy="91" r="4"></circle><circle class="p2" cx="406" cy="74" r="4"></circle><circle class="p2" cx="574" cy="34" r="4"></circle><circle class="p2" cx="742" cy="86" r="4"></circle><circle class="p2" cx="890" cy="104" r="4"></circle>
+          <text x="58" y="208">Oct</text><text x="226" y="208">Nov</text><text x="394" y="208">Dec</text><text x="562" y="208">Jan</text><text x="730" y="208">Feb</text><text x="878" y="208">Mar</text>
+          <text x="720" y="22" fill="#0a2f5f">P2</text><text x="720" y="48" fill="#8aa6c6">P1</text>
+        </svg>
+      </div>
+
+      <table>
+        <thead><tr><th>Studio</th><th class="num">P1 Avg MoM Var</th><th class="num">P2 Avg MoM Var</th><th class="num">P2 Monthly Range</th><th>Interpretation</th></tr></thead>
+        <tbody>
+          <tr><td>Kenkere House</td><td class="num">11.6%</td><td class="num neg">61.8%</td><td class="num">₹4.85L-₹11.11L</td><td>Volatility is high because P2 includes sharp revenue spikes in November and January.</td></tr>
+          <tr><td>Kwality House</td><td class="num">44.4%</td><td class="num pos">22.5%</td><td class="num">₹18.51L-₹27.45L</td><td>Revenue became materially more predictable while total revenue grew.</td></tr>
+          <tr><td>Supreme HQ</td><td class="num">33.9%</td><td class="num pos">25.5%</td><td class="num">₹10.20L-₹20.04L</td><td>Improved stability with modest revenue growth.</td></tr>
+          <tr><td><strong>Network</strong></td><td class="num"><strong>30.3%</strong></td><td class="num pos"><strong>15.4%</strong></td><td class="num"><strong>₹37.68L-₹58.59L</strong></td><td><strong>P2 is a stronger revenue operating rhythm.</strong></td></tr>
+        </tbody>
+      </table>
+
+      <p class="table-title">Monthly Stability Evidence</p>
+      <div class="table-scroll">
+        <table class="monthly-table">
+          <thead><tr><th>Metric</th><th class="num">Oct</th><th class="num">Nov</th><th class="num">Dec</th><th class="num">Jan</th><th class="num">Feb</th><th class="num">Mar</th><th>Readout</th></tr></thead>
+          <tbody>
+            <tr><td>P1 Revenue</td><td class="num">₹32.75L</td><td class="num">₹27.67L</td><td class="num">₹52.46L</td><td class="num">₹39.29L</td><td class="num">₹41.36L</td><td class="num">₹34.62L</td><td>Large December spike, then pullback.</td></tr>
+            <tr><td>P1 MoM Change</td><td class="num">-</td><td class="num neg">-15.5%</td><td class="num pos">+89.5%</td><td class="num neg">-25.1%</td><td class="num pos">+5.3%</td><td class="num neg">-16.3%</td><td>High volatility.</td></tr>
+            <tr><td>P2 Revenue</td><td class="num pos">₹41.54L</td><td class="num pos">₹41.50L</td><td class="num">₹46.59L</td><td class="num pos">₹58.59L</td><td class="num">₹42.95L</td><td class="num">₹37.68L</td><td>More consistent baseline, with controlled January peak.</td></tr>
+            <tr><td>P2 MoM Change</td><td class="num">-</td><td class="num">-0.1%</td><td class="num pos">+12.3%</td><td class="num pos">+25.8%</td><td class="num neg">-26.7%</td><td class="num neg">-12.3%</td><td>Lower average volatility than P1.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="kra" id="revenue">
+      <div class="kra-head">
+        <div>
+          <span class="kra-number">KRA 5</span>
+          <h2>Revenue Growth</h2>
+          <p class="sub">Objective: deliver at least +10% revenue growth across the studio network.</p>
+        </div>
+        <div>
+          <span class="status green">Met after corrected sales parsing</span>
+          <p class="stance">The corrected sales parse confirms the revenue KRA is met. P2 reached ₹2.69Cr, up 17.8%, with growth supported by both higher transaction count and stronger Kwality revenue.</p>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric"><p class="label">P1 Revenue</p><span class="value">₹2.28Cr</span><span class="note">₹2,28,14,621</span></div>
+        <div class="metric"><p class="label">P2 Revenue</p><span class="value">₹2.69Cr</span><span class="note pos">₹2,68,84,459</span></div>
+        <div class="metric"><p class="label">YoY Growth</p><span class="value">+17.8%</span><span class="note pos">Target exceeded</span></div>
+        <div class="metric"><p class="label">Transactions</p><span class="value">4,326</span><span class="note pos">+28.9% vs 3,357</span></div>
+      </div>
+
+      <div class="source-note">
+        Revenue basis: comma-cleaned positive <strong>Payment Value</strong> from Sales Raw, filtered to <strong>Calculated Location</strong> = Kenkere House, Kwality House, or Supreme HQ. <strong>Sale Total Paid In Currency</strong> is not used because it repeats cart totals across multiple sale-item rows.
+      </div>
+
+      <div class="chart-grid" style="margin-top:18px;">
+        <div class="chart">
+          <h3>Revenue by Studio</h3>
+          <div class="bar-row"><span>Kenkere P1</span><div class="bar-track"><span class="bar light" style="width:30%;"></span></div><span class="bar-value">₹42.10L</span></div>
+          <div class="bar-row"><span>Kenkere P2</span><div class="bar-track"><span class="bar green" style="width:33%;"></span></div><span class="bar-value">₹45.58L</span></div>
+          <div class="bar-row"><span>Kwality P1</span><div class="bar-track"><span class="bar light" style="width:78%;"></span></div><span class="bar-value">₹1.08Cr</span></div>
+          <div class="bar-row"><span>Kwality P2</span><div class="bar-track"><span class="bar green" style="width:100%;"></span></div><span class="bar-value">₹1.39Cr</span></div>
+          <div class="bar-row"><span>Supreme P1</span><div class="bar-track"><span class="bar light" style="width:56%;"></span></div><span class="bar-value">₹78.22L</span></div>
+          <div class="bar-row"><span>Supreme P2</span><div class="bar-track"><span class="bar green" style="width:61%;"></span></div><span class="bar-value">₹84.57L</span></div>
+        </div>
+        <div class="chart">
+          <h3>P2 Revenue Mix</h3>
+          <div class="bar-row"><span>Subscription</span><div class="bar-track"><span class="bar green" style="width:100%;"></span></div><span class="bar-value">₹2.08Cr</span></div>
+          <div class="bar-row"><span>Packs</span><div class="bar-track"><span class="bar blue" style="width:21%;"></span></div><span class="bar-value">₹42.80L</span></div>
+          <div class="bar-row"><span>Events</span><div class="bar-track"><span class="bar amber" style="width:5%;"></span></div><span class="bar-value">₹10.90L</span></div>
+          <div class="bar-row"><span>Products</span><div class="bar-track"><span class="bar light" style="width:4%;"></span></div><span class="bar-value">₹7.53L</span></div>
+        </div>
+      </div>
+
+      <p class="table-title">Revenue Detail</p>
+      <table>
+        <thead><tr><th>Studio</th><th class="num">P1 Revenue</th><th class="num">P2 Revenue</th><th class="num">Growth</th><th class="num">P2 Transactions</th><th class="num">P2 Avg Ticket</th><th>Readout</th></tr></thead>
+        <tbody>
+          <tr><td>Kenkere House</td><td class="num">₹42.10L</td><td class="num">₹45.58L</td><td class="num pos">+8.3%</td><td class="num">1,157</td><td class="num">₹3,939</td><td>Positive but below +10%; growth is transaction-led with lower average ticket.</td></tr>
+          <tr><td>Kwality House</td><td class="num">₹1.08Cr</td><td class="num">₹1.39Cr</td><td class="num pos">+28.6%</td><td class="num">1,921</td><td class="num">₹7,220</td><td>Revenue KRA leader; churn now threatens future base quality.</td></tr>
+          <tr><td>Supreme HQ</td><td class="num">₹78.22L</td><td class="num">₹84.57L</td><td class="num pos">+8.1%</td><td class="num">1,248</td><td class="num">₹6,776</td><td>Revenue is positive after corrected parsing; still slightly below +10% location target.</td></tr>
+          <tr><td><strong>Network</strong></td><td class="num"><strong>₹2.28Cr</strong></td><td class="num"><strong>₹2.69Cr</strong></td><td class="num pos"><strong>+17.8%</strong></td><td class="num"><strong>4,326</strong></td><td class="num"><strong>₹6,215</strong></td><td><strong>Network target met.</strong></td></tr>
+        </tbody>
+      </table>
+
+      <p class="table-title">Monthly Revenue Detail</p>
+      <table>
+        <thead><tr><th>Period</th><th class="num">Oct</th><th class="num">Nov</th><th class="num">Dec</th><th class="num">Jan</th><th class="num">Feb</th><th class="num">Mar</th><th class="num">Total</th></tr></thead>
+        <tbody>
+          <tr><td>P1 Network</td><td class="num">₹32.75L</td><td class="num">₹27.67L</td><td class="num">₹52.46L</td><td class="num">₹39.29L</td><td class="num">₹41.36L</td><td class="num">₹34.62L</td><td class="num">₹2.28Cr</td></tr>
+          <tr><td>P2 Network</td><td class="num">₹41.54L</td><td class="num">₹41.50L</td><td class="num">₹46.59L</td><td class="num">₹58.59L</td><td class="num">₹42.95L</td><td class="num">₹37.68L</td><td class="num pos">₹2.69Cr</td></tr>
+          <tr><td>P1 Transactions</td><td class="num">687</td><td class="num">468</td><td class="num">518</td><td class="num">554</td><td class="num">570</td><td class="num">560</td><td class="num">3,357</td></tr>
+          <tr><td>P2 Transactions</td><td class="num pos">707</td><td class="num pos">703</td><td class="num pos">715</td><td class="num pos">704</td><td class="num pos">734</td><td class="num pos">763</td><td class="num pos">4,326</td></tr>
+        </tbody>
+      </table>
+
+      <p class="table-title">P2 Monthly Revenue by Studio</p>
+      <div class="table-scroll">
+        <table class="monthly-table">
+          <thead><tr><th>Studio</th><th class="num">Oct</th><th class="num">Nov</th><th class="num">Dec</th><th class="num">Jan</th><th class="num">Feb</th><th class="num">Mar</th><th class="num">Total</th><th>Readout</th></tr></thead>
+          <tbody>
+            <tr><td>Kenkere House</td><td class="num">₹4.85L</td><td class="num">₹9.79L</td><td class="num">₹5.28L</td><td class="num">₹11.11L</td><td class="num">₹8.34L</td><td class="num">₹6.21L</td><td class="num">₹45.58L</td><td>Growth is positive but uneven month to month.</td></tr>
+            <tr><td>Kwality House</td><td class="num">₹26.49L</td><td class="num">₹18.51L</td><td class="num">₹26.86L</td><td class="num">₹27.45L</td><td class="num">₹19.21L</td><td class="num">₹20.18L</td><td class="num pos">₹1.39Cr</td><td>Largest revenue contributor and main reason network target is met.</td></tr>
+            <tr><td>Supreme HQ</td><td class="num">₹10.20L</td><td class="num">₹13.20L</td><td class="num">₹14.45L</td><td class="num">₹20.04L</td><td class="num">₹15.39L</td><td class="num">₹11.29L</td><td class="num">₹84.57L</td><td>Healthy revenue recovery, strongest in January.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="kra" id="sop">
+      <div class="kra-head">
+        <div>
+          <span class="kra-number">KRA 6</span>
+          <h2>SOP Compliance & Documentation</h2>
+          <p class="sub">Objective: make operating standards easy to access, review, and connect to sales, service, retention, and escalation workstreams.</p>
+        </div>
+        <div>
+          <span class="status blue">Evidence hub active</span>
+          <p class="stance">The SOP KRA is documented through the 10 files already present in the SOP's folder. Each button opens a generated preview, while the original DOCX remains available for formal review.</p>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric"><p class="label">SOP Files</p><span class="value">10</span><span class="note">Loaded from SOP's folder</span></div>
+        <div class="metric"><p class="label">Preview Coverage</p><span class="value">100%</span><span class="note pos">10 generated previews</span></div>
+        <div class="metric"><p class="label">Current Evidence</p><span class="value">DOCX</span><span class="note">Original files retained</span></div>
+        <div class="metric"><p class="label">Review Action</p><span class="value">Open</span><span class="note">Preview or original</span></div>
+      </div>
+
+      <div class="insight-grid">
+        <div class="callout"><p><strong>Positive read:</strong> the SOP evidence is now directly accessible from the report, so reviewers do not need to leave the KRA pack to validate operating standards.</p></div>
+        <div class="callout"><p><strong>Governance readout:</strong> the current evidence set covers lead intake, lapsed outreach, sales flow, trial handling, hosted classes, VIP handling, escalation, offers, communications, and membership pitching.</p></div>
+      </div>
+
+      <div class="sop-layout">
+        <div class="sop-list" id="sopList">
+          <div class="sop-item active" id="sop-expiring-memberships-lapsed-outreach-sop">
+            <div class="sop-row"><p class="sop-title">Expiring Memberships & Lapsed Outreach SOP</p><span class="note">Expiring Memberships & Lapsed Outreach SOP.docx</span></div>
+            <div class="sop-actions"><a class="docx-link" href="SOP's/previews/expiring-memberships-lapsed-outreach-sop.html" target="sopFrame">Preview</a><a class="docx-link secondary-link" href="SOP's/Expiring Memberships & Lapsed Outreach SOP.docx" target="_blank" rel="noopener">Open DOCX</a></div>
+          </div>
+          <div class="sop-item" id="sop-lead-intake-outreach-sop">
+            <div class="sop-row"><p class="sop-title">Lead Intake & Outreach SOP</p><span class="note">Lead Intake & Outreach SOP.docx</span></div>
+            <div class="sop-actions"><a class="docx-link" href="SOP's/previews/lead-intake-outreach-sop.html" target="sopFrame">Preview</a><a class="docx-link secondary-link" href="SOP's/Lead Intake & Outreach SOP.docx" target="_blank" rel="noopener">Open DOCX</a></div>
+          </div>
+          <div class="sop-item" id="sop-p57-sop-001-incident-escalation-matrix">
+            <div class="sop-row"><p class="sop-title">P57 SOP 001 Incident Escalation Matrix</p><span class="note">P57_SOP_001_Incident_Escalation_Matrix.docx</span></div>
+            <div class="sop-actions"><a class="docx-link" href="SOP's/previews/p57-sop-001-incident-escalation-matrix.html" target="sopFrame">Preview</a><a class="docx-link secondary-link" href="SOP's/P57_SOP_001_Incident_Escalation_Matrix.docx" target="_blank" rel="noopener">Open DOCX</a></div>
+          </div>
+          <div class="sop-item" id="sop-p57-sop-002-discounts-and-offers">
+            <div class="sop-row"><p class="sop-title">P57 SOP 002 Discounts and Offers</p><span class="note">P57_SOP_002_Discounts_and_Offers.docx</span></div>
+            <div class="sop-actions"><a class="docx-link" href="SOP's/previews/p57-sop-002-discounts-and-offers.html" target="sopFrame">Preview</a><a class="docx-link secondary-link" href="SOP's/P57_SOP_002_Discounts_and_Offers.docx" target="_blank" rel="noopener">Open DOCX</a></div>
+          </div>
+          <div class="sop-item" id="sop-p57-sop-003-studio-communications">
+            <div class="sop-row"><p class="sop-title">P57 SOP 003 Studio Communications</p><span class="note">P57_SOP_003_Studio_Communications.docx</span></div>
+            <div class="sop-actions"><a class="docx-link" href="SOP's/previews/p57-sop-003-studio-communications.html" target="sopFrame">Preview</a><a class="docx-link secondary-link" href="SOP's/P57_SOP_003_Studio_Communications.docx" target="_blank" rel="noopener">Open DOCX</a></div>
+          </div>
+          <div class="sop-item" id="sop-p57-sop-004-membership-pitching">
+            <div class="sop-row"><p class="sop-title">P57 SOP 004 Membership Pitching</p><span class="note">P57_SOP_004_Membership_Pitching.docx</span></div>
+            <div class="sop-actions"><a class="docx-link" href="SOP's/previews/p57-sop-004-membership-pitching.html" target="sopFrame">Preview</a><a class="docx-link secondary-link" href="SOP's/P57_SOP_004_Membership_Pitching.docx" target="_blank" rel="noopener">Open DOCX</a></div>
+          </div>
+          <div class="sop-item" id="sop-physique57-sop3-sales-flow">
+            <div class="sop-row"><p class="sop-title">Physique57 SOP3 Sales Flow</p><span class="note">Physique57_SOP3_Sales_Flow.docx</span></div>
+            <div class="sop-actions"><a class="docx-link" href="SOP's/previews/physique57-sop3-sales-flow.html" target="sopFrame">Preview</a><a class="docx-link secondary-link" href="SOP's/Physique57_SOP3_Sales_Flow.docx" target="_blank" rel="noopener">Open DOCX</a></div>
+          </div>
+          <div class="sop-item" id="sop-physique57-sop4-trial-member-handling">
+            <div class="sop-row"><p class="sop-title">Physique57 SOP4 Trial Member Handling</p><span class="note">Physique57_SOP4_Trial_Member_Handling.docx</span></div>
+            <div class="sop-actions"><a class="docx-link" href="SOP's/previews/physique57-sop4-trial-member-handling.html" target="sopFrame">Preview</a><a class="docx-link secondary-link" href="SOP's/Physique57_SOP4_Trial_Member_Handling.docx" target="_blank" rel="noopener">Open DOCX</a></div>
+          </div>
+          <div class="sop-item" id="sop-physique57-sop5-hosted-class-handling">
+            <div class="sop-row"><p class="sop-title">Physique57 SOP5 Hosted Class Handling</p><span class="note">Physique57_SOP5_Hosted_Class_Handling.docx</span></div>
+            <div class="sop-actions"><a class="docx-link" href="SOP's/previews/physique57-sop5-hosted-class-handling.html" target="sopFrame">Preview</a><a class="docx-link secondary-link" href="SOP's/Physique57_SOP5_Hosted_Class_Handling.docx" target="_blank" rel="noopener">Open DOCX</a></div>
+          </div>
+          <div class="sop-item" id="sop-physique57-sop6-vip-handling">
+            <div class="sop-row"><p class="sop-title">Physique57 SOP6 VIP Handling</p><span class="note">Physique57_SOP6_VIP_Handling.docx</span></div>
+            <div class="sop-actions"><a class="docx-link" href="SOP's/previews/physique57-sop6-vip-handling.html" target="sopFrame">Preview</a><a class="docx-link secondary-link" href="SOP's/Physique57_SOP6_VIP_Handling.docx" target="_blank" rel="noopener">Open DOCX</a></div>
+          </div>
+        </div>
+        <div class="sop-viewer">
+          <div class="viewer-head">
+            <h3 id="viewerTitle">Expiring Memberships & Lapsed Outreach SOP</h3>
+            <span class="note" id="viewerStatus">Preview loaded from SOP's folder.</span>
+          </div>
+          <iframe id="sopFrame" name="sopFrame" title="SOP document viewer" src="SOP's/previews/expiring-memberships-lapsed-outreach-sop.html"></iframe>
+          <div id="docxPanel" class="docx-panel" hidden></div>
+        </div>
+      </div>
+
+      <p class="table-title" style="margin-top:18px;">SOP Evidence Register</p>
+      <div class="table-scroll">
+        <table class="monthly-table">
+          <thead><tr><th>SOP Document</th><th>Format</th><th>Evidence Status</th><th>KRA Link</th></tr></thead>
+          <tbody>
+            <tr><td>Lead Intake & Outreach SOP</td><td>DOCX + Preview</td><td class="pos">Available</td><td>Conversion, Trials, Referrals</td></tr>
+            <tr><td>Expiring Memberships & Lapsed Outreach SOP</td><td>DOCX + Preview</td><td class="pos">Available</td><td>Churn Reduction</td></tr>
+            <tr><td>Physique57 SOP3 Sales Flow</td><td>DOCX + Preview</td><td class="pos">Available</td><td>Conversion, Revenue Growth</td></tr>
+            <tr><td>Physique57 SOP4 Trial Member Handling</td><td>DOCX + Preview</td><td class="pos">Available</td><td>Trials & Referrals</td></tr>
+            <tr><td>Physique57 SOP5 Hosted Class Handling</td><td>DOCX + Preview</td><td class="pos">Available</td><td>Hosted-Class Acquisition</td></tr>
+            <tr><td>Physique57 SOP6 VIP Handling</td><td>DOCX + Preview</td><td class="pos">Available</td><td>Client Servicing</td></tr>
+            <tr><td>P57 SOP 001 Incident Escalation Matrix</td><td>DOCX + Preview</td><td class="pos">Available</td><td>Service Recovery</td></tr>
+            <tr><td>P57 SOP 002 Discounts and Offers</td><td>DOCX + Preview</td><td class="pos">Available</td><td>Revenue Governance</td></tr>
+            <tr><td>P57 SOP 003 Studio Communications</td><td>DOCX + Preview</td><td class="pos">Available</td><td>Client Communication</td></tr>
+            <tr><td>P57 SOP 004 Membership Pitching</td><td>DOCX + Preview</td><td class="pos">Available</td><td>Conversion, Revenue Growth</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="kra" id="feedback">
+      <div class="kra-head">
+        <div>
+          <span class="kra-number">KRA 7</span>
+          <h2>Feedback System Intelligence</h2>
+          <p class="sub">Objective: convert trial feedback into clear retention, conversion, and scheduling actions.</p>
+        </div>
+        <div>
+          <span class="status blue">Strong sentiment with operational action points</span>
+          <p class="stance">This readout is based on 19 finished submissions from the Fillout feedback workflow between 10 Feb 2026 and 06 May 2026.</p>
+          <div class="feedback-actions">
+            <a class="docx-link" href="https://kind-cx-ai.vercel.app/" target="_blank" rel="noopener">View Past Incidents</a>
+            <a class="docx-link secondary-link" href="https://ticketing-manager.vercel.app/" target="_blank" rel="noopener">Ticketing System Prototype</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric"><p class="label">Submissions</p><span class="value">19</span><span class="note">100% finished</span></div>
+        <div class="metric"><p class="label">Overall Experience</p><span class="value">100%</span><span class="note">Very Good or Excellent</span></div>
+        <div class="metric"><p class="label">Advocacy Score</p><span class="value">9.4 / 10</span><span class="note">NPS-style score: <span class="pos">79</span></span></div>
+        <div class="metric"><p class="label">Repeat Intent</p><span class="value">8.6 / 10</span><span class="note">Average attend-again likelihood</span></div>
+      </div>
+
+      <div class="insight-grid">
+        <div class="callout"><p><strong>Conversion signal:</strong> 10 of 19 members reported immediate join intent. Another 5 are still deciding, so follow-up quality and speed can materially lift close rate.</p></div>
+        <div class="callout"><p><strong>Main friction:</strong> commute and timing are the top barriers. Location convenience appears in 5 responses, while schedule mismatch appears in 2 responses.</p></div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="chart">
+          <h3>Top Join Barriers</h3>
+          <div class="bar-row"><span>Location / Commute</span><div class="bar-track"><span class="bar red" style="width:100%;"></span></div><span class="bar-value">5</span></div>
+          <div class="bar-row"><span>Timing Mismatch</span><div class="bar-track"><span class="bar amber" style="width:40%;"></span></div><span class="bar-value">2</span></div>
+          <div class="bar-row"><span>Pricing</span><div class="bar-track"><span class="bar amber" style="width:40%;"></span></div><span class="bar-value">2</span></div>
+          <div class="bar-row"><span>Competing Commitments</span><div class="bar-track"><span class="bar light" style="width:20%;"></span></div><span class="bar-value">1</span></div>
+        </div>
+        <div class="chart">
+          <h3>Preferred Time Bands</h3>
+          <div class="bar-row"><span>Morning (7-10 AM)</span><div class="bar-track"><span class="bar green" style="width:100%;"></span></div><span class="bar-value">6</span></div>
+          <div class="bar-row"><span>Evening (4-7 PM)</span><div class="bar-track"><span class="bar green" style="width:100%;"></span></div><span class="bar-value">6</span></div>
+          <div class="bar-row"><span>Late Evening</span><div class="bar-track"><span class="bar amber" style="width:83%;"></span></div><span class="bar-value">5</span></div>
+          <div class="bar-row"><span>Weekends Only</span><div class="bar-track"><span class="bar light" style="width:67%;"></span></div><span class="bar-value">4</span></div>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table class="monthly-table">
+          <thead><tr><th>Feedback Dimension</th><th>Result</th><th>Readout</th></tr></thead>
+          <tbody>
+            <tr><td>Instructor Energy & Motivation</td><td class="num">4.95 / 5</td><td>18 of 19 rated this as Excellent.</td></tr>
+            <tr><td>Teaching Style & Clarity</td><td class="num">4.89 / 5</td><td>Consistent coaching quality across instructors.</td></tr>
+            <tr><td>Cleanliness & Ambiance</td><td class="num">4.89 / 5</td><td>Studio quality is supporting premium perception.</td></tr>
+            <tr><td>Class Difficulty Fit</td><td class="num">4.79 / 5</td><td>Mostly right; beginner pacing requests still appear in comments.</td></tr>
+            <tr><td>Workout Intensity Signal</td><td class="num">11 / 19</td><td>Most members describe sessions as slightly difficult but manageable.</td></tr>
+            <tr><td>Acquisition Channel Mix</td><td class="num">8 / 19</td><td>Instagram/Facebook remains the largest trial source channel.</td></tr>
+            <tr><td>Primary Goal Cluster</td><td class="num">7 / 19</td><td>Building strength is the dominant trial-member objective.</td></tr>
+            <tr><td>Monthly Submission Pattern</td><td class="num">Feb: 7</td><td>Mar: 4, Apr: 3, May: 5; feedback volume is steady with no drop-off.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Data basis: Day End metrics use First Visit Date, First Visit Location, Is New, Conversion Status, First Purchase Date, and Conversion Span. Churn uses Status = Lapsed, Purchase Date, and Primary Location from the lapsed file. Revenue uses comma-cleaned Sales Raw Payment Value, Payment Date, Payment Category, Purchase Type, and Calculated Location. Feedback KRA uses finished responses from Fillout Feedback Form - Template results.csv (10 Feb 2026 to 06 May 2026). Pop-up and blank locations are excluded from the three-studio KRA view.
+  </footer>
+</div>
+
+<div class="modal-backdrop" id="emailModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="emailModalTitle">
+    <h3 id="emailModalTitle">Email Report Copy</h3>
+    <p>Connect with Gmail to send a structured copy of the report summary. If Gmail is not signed in, Google will ask for account access first.</p>
+    <label for="emailRecipient">
+      Recipient email
+      <input id="emailRecipient" type="email" autocomplete="email" placeholder="name@example.com">
+    </label>
+    <div class="modal-actions">
+      <button class="secondary" type="button" onclick="closeEmailModal()">Cancel</button>
+      <button class="primary" type="button" onclick="sendReportEmail()">Connect Google & Send</button>
+    </div>
+    <div class="email-status" id="emailStatus" aria-live="polite"></div>
+  </div>
+</div>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+const GOOGLE_CLIENT_ID = "";
+const sopDocuments = [
+  { key: "expiring-memberships-lapsed-outreach-sop", title: "Expiring Memberships & Lapsed Outreach SOP", fileName: "Expiring Memberships & Lapsed Outreach SOP.docx", previewUrl: "SOP's/previews/expiring-memberships-lapsed-outreach-sop.html", originalUrl: "SOP's/Expiring Memberships & Lapsed Outreach SOP.docx" },
+  { key: "lead-intake-outreach-sop", title: "Lead Intake & Outreach SOP", fileName: "Lead Intake & Outreach SOP.docx", previewUrl: "SOP's/previews/lead-intake-outreach-sop.html", originalUrl: "SOP's/Lead Intake & Outreach SOP.docx" },
+  { key: "p57-sop-001-incident-escalation-matrix", title: "P57 SOP 001 Incident Escalation Matrix", fileName: "P57_SOP_001_Incident_Escalation_Matrix.docx", previewUrl: "SOP's/previews/p57-sop-001-incident-escalation-matrix.html", originalUrl: "SOP's/P57_SOP_001_Incident_Escalation_Matrix.docx" },
+  { key: "p57-sop-002-discounts-and-offers", title: "P57 SOP 002 Discounts and Offers", fileName: "P57_SOP_002_Discounts_and_Offers.docx", previewUrl: "SOP's/previews/p57-sop-002-discounts-and-offers.html", originalUrl: "SOP's/P57_SOP_002_Discounts_and_Offers.docx" },
+  { key: "p57-sop-003-studio-communications", title: "P57 SOP 003 Studio Communications", fileName: "P57_SOP_003_Studio_Communications.docx", previewUrl: "SOP's/previews/p57-sop-003-studio-communications.html", originalUrl: "SOP's/P57_SOP_003_Studio_Communications.docx" },
+  { key: "p57-sop-004-membership-pitching", title: "P57 SOP 004 Membership Pitching", fileName: "P57_SOP_004_Membership_Pitching.docx", previewUrl: "SOP's/previews/p57-sop-004-membership-pitching.html", originalUrl: "SOP's/P57_SOP_004_Membership_Pitching.docx" },
+  { key: "physique57-sop3-sales-flow", title: "Physique57 SOP3 Sales Flow", fileName: "Physique57_SOP3_Sales_Flow.docx", previewUrl: "SOP's/previews/physique57-sop3-sales-flow.html", originalUrl: "SOP's/Physique57_SOP3_Sales_Flow.docx" },
+  { key: "physique57-sop4-trial-member-handling", title: "Physique57 SOP4 Trial Member Handling", fileName: "Physique57_SOP4_Trial_Member_Handling.docx", previewUrl: "SOP's/previews/physique57-sop4-trial-member-handling.html", originalUrl: "SOP's/Physique57_SOP4_Trial_Member_Handling.docx" },
+  { key: "physique57-sop5-hosted-class-handling", title: "Physique57 SOP5 Hosted Class Handling", fileName: "Physique57_SOP5_Hosted_Class_Handling.docx", previewUrl: "SOP's/previews/physique57-sop5-hosted-class-handling.html", originalUrl: "SOP's/Physique57_SOP5_Hosted_Class_Handling.docx" },
+  { key: "physique57-sop6-vip-handling", title: "Physique57 SOP6 VIP Handling", fileName: "Physique57_SOP6_VIP_Handling.docx", previewUrl: "SOP's/previews/physique57-sop6-vip-handling.html", originalUrl: "SOP's/Physique57_SOP6_VIP_Handling.docx" }
+];
+
+let activeSopKey = sopDocuments[0].key;
+let tokenClient = null;
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[char]));
+}
+
+function renderSopList() {
+  const list = document.getElementById("sopList");
+  list.innerHTML = sopDocuments.map(doc => [
+    "<div class=\"sop-item " + (doc.key === activeSopKey ? "active" : "") + "\" id=\"sop-" + doc.key + "\">",
+    "<div class=\"sop-row\">",
+    "<p class=\"sop-title\">" + escapeHtml(doc.title) + closeTag("p"),
+    "<span class=\"note\">" + escapeHtml(doc.fileName) + closeTag("span"),
+    closeTag("div"),
+    "<div class=\"sop-actions\">",
+    "<a class=\"docx-link\" href=\"" + doc.previewUrl + "\" target=\"sopFrame\" onclick=\"openSop('" + doc.key + "'); return false;\">Preview" + closeTag("a"),
+    "<a class=\"docx-link secondary-link\" href=\"" + doc.originalUrl + "\" target=\"_blank\" rel=\"noopener\">Open DOCX" + closeTag("a"),
+    closeTag("div"),
+    closeTag("div")
+  ].join("")).join("");
+}
+
+function showFrame(src, title, status) {
+  const frame = document.getElementById("sopFrame");
+  const docxPanel = document.getElementById("docxPanel");
+  document.getElementById("viewerTitle").textContent = title;
+  document.getElementById("viewerStatus").textContent = status;
+  docxPanel.hidden = true;
+  frame.hidden = false;
+  frame.src = src;
+}
+
+function openSop(key) {
+  const doc = sopDocuments.find(item => item.key === key) || sopDocuments[0];
+  activeSopKey = doc.key;
+  renderSopList();
+  showFrame(doc.previewUrl, doc.title, "Preview loaded from SOP's folder. Original DOCX is available from the left panel.");
+}
+
+function closeTag(name) {
+  return "<" + "/" + name + ">";
+}
+
+function exportPdf() {
+  window.print();
+}
+
+function cloneReportForExport() {
+  const clone = document.querySelector(".page").cloneNode(true);
+  clone.querySelectorAll(".report-controls, .nav, .sop-actions").forEach(node => node.remove());
+  clone.querySelectorAll("iframe").forEach(frame => {
+    const note = document.createElement("div");
+    note.className = "source-note";
+    note.textContent = "SOP previews are available in the SOP's/previews folder beside this report.";
+    frame.replaceWith(note);
+  });
+  return clone.outerHTML;
+}
+
+function buildExportHtml() {
+  const styles = document.querySelector("style").textContent;
+  return [
+    "<!DOCTYPE html>",
+    "<html lang=\"en\">",
+    "<head>",
+    "<meta charset=\"UTF-8\">",
+    "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+    "<title>Physique 57 India - KRA Performance Review" + closeTag("title"),
+    "<style>" + styles + closeTag("style"),
+    closeTag("head"),
+    "<body>" + cloneReportForExport() + closeTag("body"),
+    closeTag("html")
+  ].join("\n");
+}
+
+function downloadBlob(content, fileName, mimeType) {
+  const blob = new Blob([content], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function exportHtml() {
+  downloadBlob(buildExportHtml(), "p57-kra-performance-review-oct-2025-mar-2026.html", "text/html;charset=utf-8");
+}
+
+function exportWord() {
+  const wordHtml = buildExportHtml()
+    .replace("<html lang=\"en\">", "<html lang=\"en\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:w=\"urn:schemas-microsoft-com:office:word\" xmlns=\"http://www.w3.org/TR/REC-html40\">")
+    .replace(closeTag("head"), "<xml><w:WordDocument><w:View>Print" + closeTag("w:View") + "<w:Zoom>90" + closeTag("w:Zoom") + closeTag("w:WordDocument") + closeTag("xml") + closeTag("head"));
+  downloadBlob("\ufeff" + wordHtml, "p57-kra-performance-review-oct-2025-mar-2026.doc", "application/msword;charset=utf-8");
+}
+
+function openEmailModal() {
+  const modal = document.getElementById("emailModal");
+  const status = document.getElementById("emailStatus");
+  modal.hidden = false;
+  status.textContent = "";
+  setTimeout(() => document.getElementById("emailRecipient").focus(), 0);
+}
+
+function closeEmailModal() {
+  document.getElementById("emailModal").hidden = true;
+}
+
+function buildEmailSubject() {
+  return "Physique 57 India KRA Performance Review | Oct 2025-Mar 2026";
+}
+
+function buildEmailTextBody() {
+  return [
+    "Hi,",
+    "",
+    "Sharing the Physique 57 India KRA Performance Review for Oct 2025-Mar 2026.",
+    "",
+    "Executive summary:",
+    "- Corrected revenue: ₹2.69Cr, +17.8% versus P1.",
+    "- New members: 2,041, +40.7% versus P1.",
+    "- Same-season conversions: 336, +12.0% versus P1.",
+    "- Referrals: 264, +127.6% versus P1.",
+    "- Main risk: churn increased to 763 lapsed memberships, led by Kwality House.",
+    "",
+    "KRA readout:",
+    "1. Conversion Growth: stronger P2 intake and same-season conversion volume; total rate remains timing-sensitive.",
+    "2. Churn Reduction: not met; retention sprint required, especially at Kwality House.",
+    "3. Trials & Referrals: referrals and hosted-class acquisition materially improved the lead mix.",
+    "4. Revenue Stabilisation: network MoM volatility improved from 30.3% to 15.4%.",
+    "5. Revenue Growth: met; corrected P2 revenue reached ₹2.69Cr.",
+    "6. SOP Compliance: 10 SOP files are available in the report's SOP evidence hub.",
+    "",
+    "Author: Jimmeey Gondaa, Head of Sales & Client Servicing",
+  ].join("\n");
+}
+
+function buildEmailHtmlBody() {
+  const td = " style=\"border:1px solid #deded6;padding:8px;\"";
+  const row = (label, value) => "<tr><td" + td + ">" + label + closeTag("td") + "<td" + td + ">" + value + closeTag("td") + closeTag("tr");
+  return [
+    "<div style=\"font-family:Arial,sans-serif;color:#20201d;line-height:1.55;\">",
+    "<h2 style=\"margin:0 0 8px;\">Physique 57 India KRA Performance Review" + closeTag("h2"),
+    "<p style=\"margin:0 0 16px;color:#60605a;\">Review period: Oct 2025-Mar 2026 | Baseline: Oct 2024-Mar 2025" + closeTag("p"),
+    "<h3>Executive Summary" + closeTag("h3"),
+    "<table style=\"border-collapse:collapse;width:100%;max-width:720px;\">",
+    row("Corrected revenue", "<strong>₹2.69Cr" + closeTag("strong") + " (+17.8%)"),
+    row("New members", "<strong>2,041" + closeTag("strong") + " (+40.7%)"),
+    row("Same-season conversions", "<strong>336" + closeTag("strong") + " (+12.0%)"),
+    row("Referrals", "<strong>264" + closeTag("strong") + " (+127.6%)"),
+    row("Primary risk", "<strong>Churn:" + closeTag("strong") + " 763 lapsed memberships"),
+    closeTag("table"),
+    "<h3>KRA Readout" + closeTag("h3"),
+    "<ol>",
+    "<li><strong>Conversion Growth:" + closeTag("strong") + " P2 has stronger intake and same-season conversion volume; total conversion rate is still maturing." + closeTag("li"),
+    "<li><strong>Churn Reduction:" + closeTag("strong") + " Not met; Kwality House requires priority retention action." + closeTag("li"),
+    "<li><strong>Trials & Referrals:" + closeTag("strong") + " Referrals and hosted-class acquisition materially improved lead quality." + closeTag("li"),
+    "<li><strong>Revenue Stabilisation:" + closeTag("strong") + " Network MoM volatility improved from 30.3% to 15.4%." + closeTag("li"),
+    "<li><strong>Revenue Growth:" + closeTag("strong") + " Met; corrected revenue reached ₹2.69Cr." + closeTag("li"),
+    "<li><strong>SOP Compliance:" + closeTag("strong") + " 10 SOP files are available in the SOP evidence hub." + closeTag("li"),
+    closeTag("ol"),
+    "<p style=\"margin-top:18px;color:#60605a;\">Author: Jimmeey Gondaa, Head of Sales & Client Servicing" + closeTag("p"),
+    closeTag("div")
+  ].join("");
+}
+
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function openGmailDraft(recipient) {
+  const params = new URLSearchParams({
+    view: "cm",
+    fs: "1",
+    to: recipient,
+    su: buildEmailSubject(),
+    body: buildEmailTextBody()
+  });
+  window.open("https://mail.google.com/mail/?" + params.toString(), "_blank", "noopener");
+}
+
+function base64UrlEncode(value) {
+  const bytes = new TextEncoder().encode(value);
+  let binary = "";
+  bytes.forEach(byte => { binary += String.fromCharCode(byte); });
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+function requestGoogleToken() {
+  return new Promise((resolve, reject) => {
+    if (!GOOGLE_CLIENT_ID || !window.google || !window.google.accounts || !window.google.accounts.oauth2) {
+      reject(new Error("Google OAuth client is not configured."));
+      return;
+    }
+    tokenClient = window.google.accounts.oauth2.initTokenClient({
+      client_id: GOOGLE_CLIENT_ID,
+      scope: "openid email profile https://www.googleapis.com/auth/gmail.send",
+      callback: response => {
+        if (response.error) reject(new Error(response.error));
+        else resolve(response.access_token);
+      }
+    });
+    tokenClient.requestAccessToken({ prompt: "consent" });
+  });
+}
+
+async function sendViaGmailApi(recipient) {
+  const token = await requestGoogleToken();
+  let to = recipient;
+  if (!to) {
+    const profileResponse = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (profileResponse.ok) {
+      const profile = await profileResponse.json();
+      to = profile.email || "";
+    }
+  }
+  if (!isValidEmail(to)) throw new Error("Recipient email is required.");
+
+  const message = [
+    `To: ${to}`,
+    `Subject: ${buildEmailSubject()}`,
+    "MIME-Version: 1.0",
+    "Content-Type: text/html; charset=UTF-8",
+    "",
+    buildEmailHtmlBody()
+  ].join("\r\n");
+
+  const response = await fetch("https://gmail.googleapis.com/gmail/v1/users/me/messages/send", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ raw: base64UrlEncode(message) })
+  });
+  if (!response.ok) throw new Error("Gmail send failed.");
+  return to;
+}
+
+async function sendReportEmail() {
+  const recipient = document.getElementById("emailRecipient").value.trim();
+  const status = document.getElementById("emailStatus");
+
+  if (!recipient && !GOOGLE_CLIENT_ID) {
+    status.textContent = "Enter the recipient email to open a Gmail draft.";
+    return;
+  }
+  if (recipient && !isValidEmail(recipient)) {
+    status.textContent = "Enter a valid email address.";
+    return;
+  }
+
+  status.textContent = "Connecting to Gmail...";
+  if (GOOGLE_CLIENT_ID) {
+    try {
+      const sentTo = await sendViaGmailApi(recipient);
+      status.textContent = "Email sent to " + sentTo + ".";
+      return;
+    } catch (error) {
+      status.textContent = "Direct send is unavailable. Opening a Gmail draft instead.";
+    }
+  }
+
+  openGmailDraft(recipient);
+  status.textContent = "Gmail draft opened. Send it from your Google account.";
+}
+
+renderSopList();
+openSop(activeSopKey);
+</script>
+</body>
+</html>
